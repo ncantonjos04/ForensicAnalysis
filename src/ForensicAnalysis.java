@@ -1,7 +1,3 @@
-
-
-import javax.swing.event.TreeExpansionEvent;
-
 /**
  * This class represents a forensic analysis system that manages DNA data using
  * BSTs.
@@ -113,7 +109,7 @@ public class ForensicAnalysis {
      *                     marked profiles. true if yes, false otherwise
      * @return the number of profiles according to the search mode marked
      */
-    private static int slur(TreeNode x)
+    private static int numOfProfiles(TreeNode x)
     {
         if (x==null)
         {
@@ -122,14 +118,14 @@ public class ForensicAnalysis {
         int selena = 0;
         if(x.getProfile().getMarkedStatus()==true)
             selena++;
-        selena+=slur(x.getLeft());
-        selena+= slur(x.getRight());
+        selena+=numOfProfiles(x.getLeft());
+        selena+= numOfProfiles(x.getRight());
         
         return selena;
        
         
     }
-    private static int slurs(TreeNode x)
+    private static int numOfProfiless(TreeNode x)
     {
         if (x==null)
         {
@@ -138,8 +134,8 @@ public class ForensicAnalysis {
         int koocha = 0;
         if(x.getProfile().getMarkedStatus() == false)
             koocha++;
-        koocha+=slurs(x.getLeft());
-        koocha+=slurs(x.getRight());
+        koocha+=numOfProfiless(x.getLeft());
+        koocha+=numOfProfiless(x.getRight());
         
         return koocha;
        
@@ -151,9 +147,9 @@ public class ForensicAnalysis {
         
 
         TreeNode x = treeRoot;
-        int match = slur(x);
+        int match = numOfProfiles(x);
         TreeNode y = treeRoot;
-        int dotcom = slurs(y);
+        int dotcom = numOfProfiless(y);
         
         if (isOfInterest== true) 
             return match;
@@ -288,10 +284,10 @@ public class ForensicAnalysis {
             else if (nood.getLeft()==null)
                 return nood.getRight();
 
-            TreeNode hey = nood;
-            nood = min(hey.getRight());
-            nood.setRight(deleteMin(hey.getRight()));
-            nood.setLeft(hey.getLeft());
+            TreeNode newNode = nood;
+            nood = min(newNode.getRight());
+            nood.setRight(deleteMin(newNode.getRight()));
+            nood.setLeft(newNode.getLeft());
         }
         return nood;
     }
@@ -305,14 +301,14 @@ public class ForensicAnalysis {
      * Requires the use of getUnmarkedPeople and removePerson.
      */
     public void cleanupTree() {
-        String[] hey = new String[getUnmarkedPeople().length];
-        for (int x = 0; x<hey.length;x++)
+        String[] unmarked = new String[getUnmarkedPeople().length];
+        for (int x = 0; x<unmarked.length;x++)
         {
-            hey[x]=getUnmarkedPeople()[x];
+            unmarked[x]=getUnmarkedPeople()[x];
         }
-        for (int i = 0; i<hey.length; i++)
+        for (int i = 0; i<unmarked.length; i++)
         {
-            removePerson(hey[i]);
+            removePerson(unmarked[i]);
         }
     }
 
